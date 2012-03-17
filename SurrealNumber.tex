@@ -6,6 +6,7 @@
 \usepackage{fontspec}
 \setmainfont{Minion Pro}
 \pagestyle{plain}
+\punctstyle{kaiming}
 %\usepackage{unicode-math}
 %\setmathfont{STIX Math}
 
@@ -13,6 +14,7 @@
 \newtheorem{defn}{定义}
 \newtheorem{thm}{定理}
 \newcommand{\pname}[1]{\underline{#1}}
+\numberwithin{equation}{section}
 
 \begin{document}
 \title{\bfseries Surreal Number 的学习笔记}
@@ -25,19 +27,19 @@ Surreal Number （下称\pname{超现实数}）是 John Horton Conway 创造的�
 数域，具体历史可以看 Wikipedia 上的解释。我知道这个概念很久了，最早是大
 二的时候看到科普名家谈祥柏先生翻译的一本新书《取胜之道》，这书是对
 1986 年出版的两卷本 \textit{Winning Ways for Your Mathematical Plays}
-的翻译，讨论的是名为 \textit{Combinatorial Game Theory} 的，关于两人博
-弈游戏的数学理论，里面用到了超现实数作为工具。我对这类博弈理论（和经济
-  学里面的博弈论是两回事）的兴趣也久，关于这方面的书我能买的买，能下载
-的下载，基本上都收集全了，却因为兴趣广杂，专注欠缺迟迟而没有开始。最近
-刚好在看 Knuth 的那本小说 \textit{Surreal Numbers}，于是决定重新开始，
-按照这本书的脉络学习超现实数的相关理论，为后面学习 CGT 打下基础，毕竟
-better late than never。
+的翻译，讨论的是名为 ``Combinatorial Game Theory'' 的，关于两人博弈游戏
+的数学理论，里面用到了超现实数作为工具。我对这类博弈理论（和经济学里面
+  的博弈论是两回事）的兴趣也久，关于这方面的书我能买的买，能下载的下载，
+基本上都收集全了，却因为兴趣广杂，专注欠缺迟迟而没有开始。最近刚好在看
+Knuth 的那本小说 \textit{Surreal Numbers}，于是决定重新开始，按照这本书
+的脉络学习超现实数的相关理论，为后面学习 CGT 打下基础，毕竟 better
+late than never。
 
 \section{超现实数的定义}
 \begin{defn}
   \label{defnSurreal}
   每个超现实数 $x$ 都是一对集合，记为 $x=\{X_L \mid X_R\}$。$X_L$ 和
-  $X_R$ 都是已构造出的超现实数形成的集合，分别称为 $x$ 的左集和右集。
+  $X_R$ 都是已构造出的全部超现实数的子集，分别称为 $x$ 的左集和右集。
   $X_R$ 中任意一个数都不\pname{小于等于} $X_L$ 中任意一个数。
 \end{defn}
 
@@ -62,14 +64,55 @@ better late than never。
 有了上面的符号约定，定义~\ref{defnSurreal} 即是说 $x=\{X_L \mid X_R\}$
 是一个超现实数，除了满足 $X_L$ 和 $X_R$ 均由现有超现实数组成之外，还需
 满足下面的条件：
-$$
-\forall a \in X_L \,\forall b \in X_R: b\nleq a.
-$$
+\begin{equation}
+  \label{eqSurreal}
+  \forall\, a \in X_L \,\forall\, b \in X_R:\: b\nleq a.
+\end{equation}
 
-定义~\ref{defnLeq} 即是说 $x \leq y$ 当且仅当下面两个条件成立：
-$$
-\nexists\, m \in X_L, \text{s.t. }y \leq m \quad
-\nexists\, n \in Y_R, \text{s.t. }n \leq x.
-$$
- 
+定义~\ref{defnLeq} 即是说
+\begin{equation}
+  \label{eqLeq}
+  x \leq y \quad\Leftrightarrow\quad
+  \neg(\exists\, x_L \in X_L :\: y \leq x_L)\, \wedge \,
+  \neg(\exists\, y_R \in Y_R :\: y_R \leq x).
+\end{equation}
+
+现在定义有了，符号有了，我们下面做什么呢？或者说，根据这两个看上去空空
+如也的定义，能做些什么呢？我们可以试着构造一个超现实数。根据定
+义~\ref{defnSurreal}，首先要有两个超现实数的集合才能定义超现实数，但现
+在似乎什么都没有，无从下手啊。但是：空集也是集合，而且也是已有超现实数
+的一个子集！
+
+于是，我们根据空集可以构造出这个东西来：$\{\emptyset\mid\emptyset\}$，
+下面不妨简记为 $\{\,\mid\,\}$。检查一下它符合定义~\ref{defnSurreal} 么？
+左集右集空无一物，当然满足 \eqref{eqSurreal} 的条件，所以第一个超现实数
+就已经有了：$\{\,\mid\,\}$。
+
+我们给第一个超现实数 $\{\,\mid\,\}$ 一个名字，称之为“零”，用符号 $0$ 来
+表示，也即
+\begin{equation}
+  0 \equiv \{\,\mid\,\}
+\end{equation}
+这里 $\equiv$ 的意思是等同替代，0 只是为了表示 $\{\,\mid\,\}$ 的一个简
+记符号，它和我们熟知的自然数 0 只是碰巧符号相同而已。$\equiv$ 和等于号
+$=$ 也没有任何联系，我们还不知道超现实数的等于是什么定义呢。
+
+$\{\,\mid\,\}$ 符合定义~\ref{defnSurreal}，是我们能构造的第一个超现实数，
+然后看定义~\ref{defnLeq}，是不是有 $0 \leq 0$ 呢？注意，这里 $0$ 并不是
+自然数，所以成立与否还是需要证明的。我们下面开始证明确实有
+\begin{equation}
+  \label{eqZeroLeqZero}
+  \{\,\mid\,\}\leq\{\,\mid\,\}
+\end{equation}
+
+\begin{proof}[证明]
+  根据 \eqref{eqLeq}，若要证明 \eqref{eqZeroLeqZero}，就是要证明
+  \[
+  \neg(\exists\,x_L\in\emptyset:\:\{\,\mid\,\}\leq x_L)\,\wedge\,
+  \neg(\exists\,y_R\in\emptyset:\:y_R\leq\{\,\mid\,\})
+  \]
+  虽然我们还是不知道上面这个命题里 $\leq$ 的定义，但由于空集的原因，这
+  个命题显然为真。所以我们证明了 $0\leq0$ 成立。
+\end{proof}
+
 \end{document}
