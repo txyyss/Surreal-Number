@@ -36,34 +36,40 @@ better late than never。
 \section{超现实数的定义}
 \begin{defn}
   \label{defnSurreal}
-  每个超现实数 $x$ 都是一对已构造出的超现实数组成的集合，$x=\{X_L \mid
-  X_R\}$。$X_L$ 和 $X_R$ 都是已有的超现实数的子集，分别称为 $x$ 的左集
-  和右集。$X_R$ 中任意一个数都不\pname{小于或等于} $X_L$ 中任意一个数。
+  每个超现实数 $x$ 都是一对集合，记为 $x=\{X_L \mid X_R\}$。$X_L$ 和
+  $X_R$ 都是已构造出的超现实数形成的集合，分别称为 $x$ 的左集和右集。
+  $X_R$ 中任意一个数都不\pname{小于等于} $X_L$ 中任意一个数。
 \end{defn}
 
-这是一个递归定义，递归没问题，但有个缺憾，我们不知道对超现实数来讲，什
-么叫做小于或等于，于是就有了下面这第二个定义：
+这是一个递归定义，递归没问题，问题是我们还不知道对超现实数来讲，什么叫
+做\pname{小于等于}，于是就有了下面这个定义：
 
 \begin{defn}
   \label{defnLeq}
-  一个超现实数 $x$ 小于或等于另一个超现实数 $y$，当且仅当 $y$ 不小于或
-  等于 $x$ 的左集中任何一数，且 $y$ 的右集中没有数小于或等于 $x$。
+  一个超现实数 $x$ 小于等于另一个超现实数 $y$，当且仅当 $y$ 不小于或
+  等于 $x$ 的左集中任何一数，且 $y$ 的右集中没有数小于等于 $x$。
 \end{defn}
 
-这同样也是一个递归的定义。有了上面这两个定义，超现实数的构造方法就已经
-清楚了。我们可以根据定义开始构造超现实数，并证明大量有趣的事实。在此之
-前，我们做一些符号约定：
+这同样也是一个递归的定义。为了能够把这两个定义看得更清楚些，我们可以先
+做一些符号约定：
+
 \newtheorem*{symbolDef}{符号约定}
 \begin{symbolDef}
-  符号 $\leq$ 表示超现实数定义中的\pname{小于或等于}，符号 $\nleq$ 表示\pname{不
-  小于等于}，也就是说 $x \nleq y$ 等价于 $\neg(x \leq y)$。
+  符号 $\leq$ 表示超现实数定义中的\pname{小于等于}，符号 $\nleq$ 表示
+  \pname{不小于等于}，也就是说 $x \nleq y$ 等价于 $\neg(x \leq y)$。
 \end{symbolDef}
 
-有了这个符号，那么定义~\ref{defnLeq} 用符号来记就是说 $x \leq y$ 当且仅
-当下面两个条件成立：
+有了上面的符号约定，定义~\ref{defnSurreal} 即是说 $x=\{X_L \mid X_R\}$
+是一个超现实数，除了满足 $X_L$ 和 $X_R$ 均由现有超现实数组成之外，还需
+满足下面的条件：
+$$
+\forall a \in X_L \,\forall b \in X_R: b\nleq a.
+$$
+
+定义~\ref{defnLeq} 即是说 $x \leq y$ 当且仅当下面两个条件成立：
 $$
 \nexists\, m \in X_L, \text{s.t. }y \leq m \quad
-\nexists\, n \in Y_R, \text{s.t. }n \leq x
-$$ 
-
+\nexists\, n \in Y_R, \text{s.t. }n \leq x.
+$$
+ 
 \end{document}
