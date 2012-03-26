@@ -125,5 +125,82 @@ $\emptyset$，那么根据定义我们应该这么记这个“数”（因为还
 我们除了省掉空集记号 $\emptyset$ 之外，还省掉表示左右集本身的花括号，只
 剩表示超现实数的花括号。这样原先这个“数”就可以记成 $\{0\mid\,\}$。
 
+接下来通过把 $0$ 放在左集或右集，我们能再构造出三个数：
+\[
+\{\,\mid 0\},\{0\mid\,\}\,\text{和}\,\{0\mid 0\}
+\]
+其中第三个数 $\{0\mid 0\}$ 因为右集的 $0$ 小于等于左集的 $0$，不符合超
+现实数的定义，所以不是超现实数。很容易验证得知，另外两个都是超现实数。
 
+可以证明
+\begin{equation}
+  \label{eq0Leq1}
+  \{\,\mid\,\}\leq\{0\mid\,\}
+\end{equation}
+\begin{proof}[证明]
+  根据定义~\ref{defnLeq} 的符号化表示 \eqref{eqLeq}，\eqref{eq0Leq1} 为
+  真当且仅当
+  \[
+  \neg(\exists\, x_L \in \emptyset :\: \{0\mid\,\} \leq x_L)\, \wedge \,
+  \neg(\exists\, y_R \in \emptyset :\: y_R \leq \{\,\mid\,\})
+  \]
+  同样因为空集的关系，上述命题显然成立。
+\end{proof}
+
+还可以证明
+\begin{equation}
+  \label{eq1NotLeq0}
+  \{0\mid\,\}\nleq\{\,\mid\,\}
+\end{equation}
+\begin{proof}[证明]
+  根据符号约定和 \eqref{eqLeq}，这就是要证明
+  \begin{equation}
+    \label{eq0Leq0}
+    \exists\, x_L \in \{0\} :\: \{\,\mid\,\} \leq x_L
+  \end{equation}
+  或
+  \[
+  \exists\, y_R \in \emptyset :\: y_R \leq \{0\mid\,\}
+  \]
+  根据 \eqref{eqZeroLeqZero}，\eqref{eq0Leq0} 成立，故上述命题成立。
+\end{proof}
+
+进一步可以证明
+\begin{equation}
+  \label{eq1Leq1}
+   \{0\mid\,\}\leq \{0\mid\,\}
+\end{equation}
+\begin{proof}[证明]
+  根据 \eqref{eqLeq}，这就是要证明
+  \begin{equation}
+    \label{eq1Leq1_1}
+    \neg(\exists\, x_L \in \{0\} :\: \{0\mid\,\} \leq x_L)    
+  \end{equation}
+  且
+  \begin{equation}
+    \label{eq1Leq1_2}
+    \neg(\exists\, y_R \in \emptyset :\: y_R \leq \{0\mid\,\})
+  \end{equation}
+  \eqref{eq1Leq1_2} 因为空集的缘故显然成立，而由 \eqref{eq1NotLeq0} 可
+  知 \eqref{eq1Leq1_1} 也成立，命题得证。
+\end{proof}
+
+为了后续讨论的方便，我们再做符号约定如下：
+\begin{symbolDef}
+  $x\leq y$ 也可写成 $y\geq x$，符号 $\geq$ 读作\pname{大于等于}。它的
+  否定\pname{不大于等于}，用符号 $\ngeq$ 表示。
+
+  $x\leq y\wedge y\nleq x$ 可简写为 $x<y$，符号 $<$ 读作\pname{小于}。
+  它的否定\pname{不小于}，用符号 $\nless$ 表示。
+
+  $x<y$ 也可写成 $y>x$，符号 $>$ 读作\pname{大于}。它的否定\pname{不大
+    于}，用符号 $\ngtr$ 表示。
+
+  $x\leq y \wedge y \leq x$ 可简写为 $x=y$，符号 $=$ 读作\pname{等于}。
+  它的否定\pname{不等于}，用符号 $\neq$ 表示。
+\end{symbolDef}
+
+这些符号及其意义对于实数来讲可说是平平无奇，但对于超现实数来说，这些符
+号现在才有了定义，千万注意不要把关于实数序关系不加证明的简单带入超现实
+数中。
 \end{document}
