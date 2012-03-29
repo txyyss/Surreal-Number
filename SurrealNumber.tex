@@ -132,7 +132,7 @@ $\emptyset$，那么根据定义我们应该这么记这个“数”（因为还
 其中第三个数 $\{0\mid 0\}$ 因为右集的 $0$ 小于等于左集的 $0$，不符合超
 现实数的定义，所以不是超现实数。很容易验证得知，另外两个都是超现实数。
 
-可以证明
+首先让我们证明
 \begin{equation}
   \label{eq0Leq1}
   \{\,\mid\,\}\leq\{0\mid\,\}
@@ -203,4 +203,41 @@ $\emptyset$，那么根据定义我们应该这么记这个“数”（因为还
 这些符号及其意义对于实数来讲可说是平平无奇，但对于超现实数来说，这些符
 号现在才有了定义，千万注意不要把关于实数序关系不加证明的简单带入超现实
 数中。
+
+有了这些新符号我们现在可以把 \eqref{eqZeroLeqZero} 写作
+\begin{equation}
+  0=0.
+\end{equation}
+而根据 \eqref{eq0Leq1} 和 \eqref{eq1NotLeq0}，则有
+\begin{equation}
+  0 < \{0\mid\,\}
+\end{equation}
+同样的，根据 \eqref{eq1Leq1} 有
+\begin{equation}
+  \{0\mid\,\}=\{0\mid\,\}
+\end{equation}
+
+和上述证明步骤类似的，我们很容易可以证明：
+\begin{align}
+  \{\,\mid 0\} &< 0\\
+  \{\,\mid 0\} &= \{\,\mid 0\}\\
+  \{\,\mid 0\} &< \{0\mid \,\}
+\end{align}
+
+现在可以给 $\{0\mid \,\}$ 和 $\{\,\mid 0\}$ 各起一个适当的名字了：我们
+把 $\{0\mid \,\}$ 叫做\pname{一}，用符号 $1$ 表示；把 $\{\,\mid 0\}$ 叫
+做\pname{负一}，用符号 $-1$ 来表示：
+\begin{align}
+  1 &\equiv \{0\mid \,\}\\
+  -1 &\equiv \{\,\mid 0\}
+\end{align}
+这样上述我们证明过的事实就可以用符号重新写成：
+\begin{align}
+  0 & < 1
+  1 & = 1
+  -1 & < 0
+  -1 & = -1
+  -1 & < 1.
+\end{align}
+这刚好和自然数里 $0,1,-1$ 的序关系是一样的。
 \end{document}
