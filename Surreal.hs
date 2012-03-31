@@ -1,12 +1,35 @@
 module Surreal where
 
-data Surreal = N [Surreal] [Surreal] deriving Show
+import Control.Monad (filterM)
+import Data.List (subsequences, intercalate)
 
--- Definition of less than or equal to
+data Surreal = N [Surreal] [Surreal] deriving Show
 
 leq :: Surreal -> Surreal -> Bool
 leq x@(N ls _ ) y@(N _ rs) = none (y `leq`) ls && none (`leq` x) rs
   where none = (not . ) . any
-        
+
 valid :: Surreal -> Bool
 valid (N ls rs) = and $ map not [x `leq` y | x <- rs, y <-ls]
+
+constructNext :: [Surreal] -> [Surreal]
+constructNext x = filter valid [N a b | a <- subsequences x, b <- subsequences x]
+
+symbolForm :: Surreal -> String
+symbolForm (N [] []) = "0"
+symbolForm (N [N[] []] []) = "1"
+symbolForm (N [] [N[] []]) = "-1"
+symbolForm (N ls rs) = "{" ++ listForm ls ++ "|" ++ listForm rs ++ "}"
+  where listForm = intercalate "," . map symbolForm
+             
+instance Eq Surreal where
+  x == y = x `leq` y && y `leq` x
+
+instance Ord Surreal where
+  (<=) = leq
+
+zero = N [] []
+
+one = N [N [] []] []
+
+mone = N [] [N [] []]
