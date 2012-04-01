@@ -1,5 +1,5 @@
 \documentclass[cs4size,a4paper,adobefonts]{ctexart}
-
+\usepackage{amsmath,amsthm,amssymb}
 \usepackage[colorlinks=true,linkcolor=black]{hyperref}
 \usepackage{indentfirst}
 \usepackage[a4paper,left=2.5cm,right=2.5cm,bottom=2.5cm,top=2.5cm]{geometry}
@@ -7,10 +7,9 @@
 \setmainfont{Minion Pro}
 \pagestyle{plain}
 \punctstyle{kaiming}
-%\usepackage{unicode-math}
-%\setmathfont{STIX Math}
+\usepackage{unicode-math}
+\setmathfont{XITS Math}
 
-\usepackage{amsmath,amsthm,amssymb}
 \newtheorem{defn}{定义}
 \newtheorem{thm}{定理}
 \newcommand{\pname}[1]{\underline{#1}}
@@ -233,10 +232,10 @@ $\emptyset$，那么根据定义我们应该这么记这个“数”（因为还
 \end{align}
 这样上述我们证明过的事实就可以用符号重新写成：
 \begin{align}
-  0 & < 1
-  1 & = 1
-  -1 & < 0
-  -1 & = -1
+  0 & < 1\\
+  1 & = 1\\
+  -1 & < 0\\
+  -1 & = -1\\
   -1 & < 1.
 \end{align}
 这刚好和自然数里 $0,1,-1$ 的序关系是一样的。
