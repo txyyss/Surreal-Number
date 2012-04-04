@@ -5,6 +5,7 @@
 \usepackage[a4paper,left=2.5cm,right=2.5cm,bottom=2.5cm,top=2.5cm]{geometry}
 \usepackage{fontspec}
 \setmainfont{Palatino}
+\setmonofont[Scale=MatchLowercase]{Monaco}
 \pagestyle{plain}
 \punctstyle{kaiming}
 \usepackage{unicode-math}
@@ -15,9 +16,11 @@
 \newcommand{\pname}[1]{\underline{#1}}
 \numberwithin{equation}{section}
 
-\usepackage{listings}
-\lstset{language=Haskell}
-
+\usepackage{fancyvrb}
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd{\FV@ListVSpace}{\@topsepadd\topsep}{}{}
+\makeatother
 \begin{document}
 \title{\bfseries Surreal Number 的学习笔记}
 \author{王盛颐}
@@ -242,4 +245,74 @@ $\emptyset$，那么根据定义我们应该这么记这个“数”（因为还
   -1 & < 1.
 \end{align*}
 这刚好和自然数里 $0,1,-1$ 的序关系是一样的。
+
+我们可以注意到，上述证明都只是在根据定义 \ref{defn:Surreal} 和定义
+\ref{defn:Leq} 进行机械的验证。这两个定义本身就是两个递归的验证算法。事
+实上，用 Haskell 语言可以很简单的编写出这样的验证程序来。
+
+首先可以定义超现实数类型 \verb|Surreal| 如下：
+\DefineVerbatimEnvironment{code}{Verbatim}{gobble=0,xleftmargin=2ex,xrightmargin=2ex}
+\fvset{gobble=0,xleftmargin=2ex,xrightmargin=2ex}
+\begin{code}
+data Surreal = N [Surreal] [Surreal] deriving Show
+\end{code}
+而表示小于等于的函数 \verb|leq|，验证是否是超现实数的函数 \verb|valid|
+则可以这么定义：
+
+\VerbatimInput{code/LeqAndValid.hs}
+
+这两个函数定义其实就是对 \eqref{eq:Leq} 和 \eqref{eq:Surreal} 的直接翻
+译。而根据已有的符号约定则可将 \verb|Surreal| 类型的等于和序关系定义如
+下：
+\begin{code}
+instance Eq Surreal where
+  x == y = x `leq` y && y `leq` x
+instance Ord Surreal where
+  (<=) = leq
+\end{code}
+那么到目前为止，我们已经得到的三个超现实数可以在程序中定义为：
+\begin{code}
+zero = N [] []
+one = N [N [] []] []
+minusOne = N [] [N [] []]
+\end{code}
+有了上述函数和常量的定义，我们就可以跑一些命令试试看了：
+\begin{code}
+*Surreal> map valid [zero, one, minusOne]
+[True,True,True]
+*Surreal> zero == zero
+True
+*Surreal> zero <= minusOne
+False
+\end{code}
+不需要证明，程序本身就能算出命题的真假来，多么神奇。进一步的，我们还可
+以用程序算出根据已经有的这三个超现实数 $0,1,-1$ 我们还可以生成哪些超现
+实数来。
+
+为了程序输出结果的可读，让我们先定义一个 \verb|Surreal| 的符号表示函数：
+\begin{code}
+symbolForm :: Surreal -> String
+symbolForm (N [] []) = "0"
+symbolForm (N [N[] []] []) = "1"
+symbolForm (N [] [N[] []]) = "-1"
+symbolForm (N ls rs) = "{" ++ listForm ls ++ "|" ++ listForm rs ++ "}"
+  where listForm = intercalate "," . map symbolForm
+\end{code}
+而根据已有超现实数生成新的超现实数的函数则可简单定义如下：
+\begin{code}
+constructNext :: [Surreal] -> [Surreal]
+constructNext x = filter valid [N a b | a <- subsequences x, 
+                                b <- subsequences x]
+\end{code}
+于是，为了得到根据 $0,1,-1$ 可生成的超现实数，只要运行下列命令：
+\VerbatimInput{code/GenerateFrom-101.hs}
+结果如下：
+\begin{code}
+["0","{|-1}","-1","{|-1,0}","{|1}","{|-1,1}","{|0,1}","{|-1,0,1}",
+"{-1|}","{-1|0}","{-1|1}","{-1|0,1}","1","{0|1}","{-1,0|}",
+"{-1,0|1}","{1|}","{-1,1|}","{0,1|}","{-1,0,1|}"]
+\end{code}
+除掉已有的 $0,1,-1$ 可得到 17 个超现实数。但这 17 个超现实数未必是“新”
+的，它们可能等于 $0,1,-1$，这点我们只需要算一下就可以知道情况了：
+\VerbatimInput{code/Filter-101.txt}
 \end{document}

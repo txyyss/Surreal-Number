@@ -1,0 +1,7 @@
+*Surreal> let gen = constructNext [minusOne, zero, one]
+*Surreal> map symbolForm $ filter (==zero) gen
+["0","{|1}","{-1|}","{-1|1}"]
+*Surreal> map symbolForm $ filter (==one) gen
+["1","{-1,0|}"]
+*Surreal> map symbolForm $ filter (==minusOne) gen
+["-1","{|0,1}"]
