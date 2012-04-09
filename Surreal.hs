@@ -1,6 +1,6 @@
 module Surreal where
 
-import Data.List (subsequences, intercalate)
+import Data.List (subsequences, intercalate, sort, group)
 
 data Surreal = N [Surreal] [Surreal] deriving Show
 

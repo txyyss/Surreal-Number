@@ -276,6 +276,7 @@ zero = N [] []
 one = N [N [] []] []
 minusOne = N [] [N [] []]
 \end{code}
+
 有了上述函数和常量的定义，我们就可以跑一些命令试试看了：
 \begin{code}
 *Surreal> map valid [zero, one, minusOne]
@@ -312,7 +313,23 @@ constructNext x = filter valid [N a b | a <- subsequences x,
 "{-1|}","{-1|0}","{-1|1}","{-1|0,1}","1","{0|1}","{-1,0|}",
 "{-1,0|1}","{1|}","{-1,1|}","{0,1|}","{-1,0,1|}"]
 \end{code}
+
 除掉已有的 $0,1,-1$ 可得到 17 个超现实数。但这 17 个超现实数未必是“新”
 的，它们可能等于 $0,1,-1$，这点我们只需要算一下就可以知道情况了：
 \VerbatimInput{code/Filter-101.txt}
+
+甚至更进一步，我们可以把已有的这 20 个超现实数的顺序关系全部算出来：
+\VerbatimInput{code/OrderFirstGen.txt}
+上述运行结果用数学语言即是意味着
+\begin{equation}
+  \begin{split}
+    \{\,\mid-1\} &=\{\,\mid-1,0\}=\{\,\mid-1,1\}=\{\,\mid-1,0,1\} \\
+    &< -1 =\{\,\mid0,1\}\\
+    &< \{-1\mid0\}=\{-1\mid0,1\}\\
+    &< 0=\{\,\mid1\}=\{-1\mid\,\}=\{-1\mid1\}\\
+    &< \{0\mid1\}=\{-1,0\mid1\}\\
+    &< 1=\{-1,0\mid\,\}\\
+    &< \{1\mid\,\}=\{-1,1\mid\,\}=\{0,1\mid\,\}=\{-1,0,1\mid\,\}
+  \end{split}
+\end{equation}
 \end{document}
