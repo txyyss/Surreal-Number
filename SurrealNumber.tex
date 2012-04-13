@@ -26,7 +26,7 @@
 \author{王盛颐}
 \date{}
 \maketitle
-\section{缘起}
+\section*{缘起}
 
 Surreal Number （下称\pname{超现实数}）是 John Horton Conway 创造的一种
 数域，具体历史可以看 Wikipedia 上的解释。我知道这个概念很久了，最早是大
@@ -40,7 +40,7 @@ Surreal Number （下称\pname{超现实数}）是 John Horton Conway 创造的�
 学习超现实数的相关理论，为后面学习 CGT 打下基础，毕竟 better late than
 never。
 
-\section{超现实数的定义}
+\section{超现实数的引入}
 \begin{defn}
   \label{defn:Surreal}
   每个超现实数 $x$ 都是一对集合，记为 $x=\{X_L \mid X_R\}$。$X_L$ 和
@@ -322,6 +322,7 @@ constructNext x = filter valid [N a b | a <- subsequences x,
 \VerbatimInput{code/OrderFirstGen.txt}
 上述运行结果用数学语言即是意味着
 \begin{equation}
+  \label{eq:firstChain}
   \begin{split}
     \{\,\mid-1\} &=\{\,\mid-1,0\}=\{\,\mid-1,1\}=\{\,\mid-1,0,1\} \\
     &< -1 =\{\,\mid0,1\}\\
@@ -332,4 +333,9 @@ constructNext x = filter valid [N a b | a <- subsequences x,
     &< \{1\mid\,\}=\{-1,1\mid\,\}=\{0,1\mid\,\}=\{-1,0,1\mid\,\}
   \end{split}
 \end{equation}
+
+上述 \eqref{eq:firstChain} 里的每个小于号和等号都可以严格的证明，但这里
+限于篇幅就不证了。程序能做的事情就不用麻烦人类了，这才是程序的意义啊。
+
+\section{基本性质}
 \end{document}
