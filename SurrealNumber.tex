@@ -338,4 +338,21 @@ constructNext x = filter valid [N a b | a <- subsequences x,
 限于篇幅就不证了。程序能做的事情就不用麻烦人类了，这才是程序的意义啊。
 
 \section{基本性质}
+
+在一开始，我们还是做一些符号约定：
+\begin{symbolDef}
+  超现实数用小写字母表示，超现实数的集合用大写字母表示。进一步的，若
+  $x$ 是一个超现实数，那么我们用 $X_L$ 和 $X_R$ 分别指代它的左集与右集。
+\end{symbolDef}
+\begin{symbolDef}
+  对任意两个超现实数的集合 $A$ 与 $B$，以及任意一超现实数 $c$，我们定义关系
+  $<,\leq,>,\geq,\nless,\nleq,\ngtr,\ngeq$ 如下：
+  
+  \begin{tabular}{l}
+    $A\leq c$ 当且仅当 $\forall a \in A:\: a \leq c$\\
+    $c\leq A$ 当且仅当 $\forall a \in A:\: c \leq a$\\
+    $A\leq A$ 当且仅当 $\forall a \in A\, \forall b \in B:\: a\leq b$\\
+  \end{tabular}\\
+其它关系的定义类似。
+\end{symbolDef}
 \end{document}
