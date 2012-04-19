@@ -13,6 +13,8 @@
 
 \newtheorem{defn}{定义}
 \newtheorem{thm}{定理}
+\newtheorem*{symbolDef}{符号约定}
+\newtheorem*{forExample}{示例}
 \newcommand{\pname}[1]{\underline{#1}}
 \numberwithin{equation}{section}
 
@@ -60,7 +62,6 @@ never。
 这同样也是一个递归的定义。为了能够把这两个定义看得更清楚些，我们可以先
 做一些符号约定：
 
-\newtheorem*{symbolDef}{符号约定}
 \begin{symbolDef}
   符号 $\leq$ 表示超现实数定义中的\pname{小于等于}，符号 $\nleq$ 表示
   \pname{不小于等于}，也就是说 $x \nleq y$ 等价于 $\neg(x \leq y)$。
@@ -96,6 +97,7 @@ never。
 我们给第一个超现实数 $\{\,\mid\,\}$ 一个名字，称之为“零”，用符号 $0$ 来
 表示，也即
 \begin{equation}
+  \label{eq:defZero}
   0 \equiv \{\,\mid\,\}
 \end{equation}
 这里 $\equiv$ 的意思是等同替代，0 只是为了表示 $\{\,\mid\,\}$ 的一个简
@@ -351,8 +353,32 @@ constructNext x = filter valid [N a b | a <- subsequences x,
   \begin{tabular}{l}
     $A\leq c$ 当且仅当 $\forall a \in A:\: a \leq c$\\
     $c\leq A$ 当且仅当 $\forall a \in A:\: c \leq a$\\
-    $A\leq A$ 当且仅当 $\forall a \in A\, \forall b \in B:\: a\leq b$\\
+    $A\leq B$ 当且仅当 $\forall a \in A\, \forall b \in B:\: a\leq b$\\
   \end{tabular}\\
-其它关系的定义类似。
+其它关系的定义类似，只要把上面定义中的 $\leq$ 换成其它关系符号就是相应
+关系符号的集合定义了。
 \end{symbolDef}
+\begin{forExample}
+  我们有 $\{-1,0\} \leq \{0,1\}$ 因为 $-1$ 和 $0$ 都小于等于 $0$ 和
+  $1$。同样还有 $\{0,1\} \nless -1$ 因为 $0$ 和 $1$ 都不小于 $-1$。
+\end{forExample}
+
+特别要注意的是，当牵涉到集合时，$\neg(A\leq b)$ \pname{不等价}于
+$A\nleq b$。如 $\{-1,1\}\leq 0$ 和 $\{-1,1\}\nleq 0$ 均不成立。
+
+从上述定义易得：不论 $b$ 的值是什么，$\emptyset \leq b$ 恒为真；
+$\emptyset \nleq b,\,\emptyset > b$ 等等均为真。
+
+\begin{symbolDef}
+  对于两个超现实数的集合 $A$ 和 $B$，我们定义关系 $=$ 如下：$A=B$ 当且
+  仅当 $\forall a \in A \, \exists\, b \in B:\:a=b \,\wedge\, \forall b
+  \in B \, \exists\, a \in A:\: a=b$
+\end{symbolDef}
+\begin{forExample}
+  $\{\{\,\mid\,\},\{1\mid\,\}\} = \{\{-1\mid
+  1\},\{\,\mid\,\},\{-1,0,1\mid\,\}\}$ 因为根据 \eqref{eq:defZero} 和
+  \eqref{eq:firstChain} 我们有 $\{\{\,\mid\,\}=\{-1\mid1\}$，
+  $\{\{\,\mid\,\}=\{\{\,\mid\,\}$ 和
+  $\{1\mid\,\}\}=\{-1,0,1\mid\,\}\}$。
+\end{forExample}
 \end{document}
