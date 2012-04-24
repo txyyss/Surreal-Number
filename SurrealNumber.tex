@@ -381,4 +381,34 @@ $\emptyset \nleq b,\,\emptyset > b$ 等等均为真。
   $\{\{\,\mid\,\}=\{\{\,\mid\,\}$ 和
   $\{1\mid\,\}\}=\{-1,0,1\mid\,\}\}$。
 \end{forExample}
+
+同样的，为了记法的简单，当一个数的左集是 $\{a,b\}\cup C \cup D$ 而右集
+为空时，我们把它记做 $\{a,b,C,D\mid\,\}$ 而不是比较麻烦的
+$\{\{a,b\}\cup C \cup D\mid\emptyset\}$。
+
+用新的符号约定，\eqref{eq:Surreal} 可重新表述为
+\begin{equation}
+  \label{eq:basic:Surreal}
+  X_L \ngeq X_R
+\end{equation}
+小于或等于 \eqref{eq:Leq} 也可以重新表述为
+\begin{equation}
+  \label{eq:basic:Leq}
+  x \leq y \quad\Leftrightarrow\quad 
+  y \nleq X_L \,\wedge\, Y_R \nleq x
+\end{equation}
+
+这里我们也重新给恒等关系 $\equiv$ 一个形式化的定义。之前我们非正式的给
+出了 $=$ 与 $\equiv$ 的区别：$x=y$ 被定义为 $x\leq y\wedge y\leq x$，而
+$x\equiv y$ 则被定义为 $x$ 的左集和右集的成员与对应的 $y$ 的左集和右集
+的成员完全相同，形式化的表达就是：
+\begin{equation}
+  \begin{split}
+    x \equiv y \quad\Leftrightarrow\quad 
+    &\forall\,x_L\in X_L:\:x_L\in Y_L \quad\wedge\quad
+    \forall\,x_R\in X_R:\:x_R\in Y_R \quad\wedge\\
+    &\forall\,y_L\in Y_L:\:y_L\in X_L \quad\wedge\quad
+    \forall\,y_R\in Y_R:\:y_R\in X_R
+  \end{split}
+\end{equation}
 \end{document}
